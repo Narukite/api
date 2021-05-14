@@ -45,7 +45,7 @@ router.get('/:type/all', async (ctx) => {
 
     const entityObjects = await Promise.all(
       entities.map(async (id) => {
-        return await getEntity(type, id, lang);
+        return await getEntity(type, id, lang as string);
       }),
     );
 
