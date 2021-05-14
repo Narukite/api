@@ -55,7 +55,7 @@ router.get('/:type/all', async (ctx) => {
 
         switch (typeof value) {
           case 'string':
-            if (!value.includes(params[key])) return false;
+            if (!value.includes(params[key] as string)) return false;
             break;
           default:
             if (value != params[key]) return false;
