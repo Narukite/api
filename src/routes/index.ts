@@ -13,14 +13,14 @@ import {
 
 const router = new Router();
 
-router.get('/', async (ctx) => {
+router.get('/', async (ctx: { body: { types: string[]; }; }) => {
   const types = await getTypes();
   ctx.body = {
     types,
   };
 });
 
-router.get('/:type', async (ctx) => {
+router.get('/:type', async (ctx: { params: { type: any; }; body: string[] | null; status: number; }) => {
   const { type } = ctx.params;
   try {
     const entityNames = await getAvailableEntities(type);
@@ -35,7 +35,7 @@ router.get('/:type', async (ctx) => {
   }
 });
 
-router.get('/:type/all', async (ctx) => {
+router.get('/:type/all', async (ctx: { query: { [x: string]: any; lang: any; }; params: { type: any; }; body: any[]; status: number; }) => {
   try {
     const { lang, ...params } = ctx.query;
     const { type } = ctx.params;
@@ -71,7 +71,7 @@ router.get('/:type/all', async (ctx) => {
   }
 });
 
-router.get('/:type/:id', async (ctx) => {
+router.get('/:type/:id', async (ctx: { query: { lang: any; }; params: { type: any; id: any; }; body: { error: any; }; status: number; }) => {
   try {
     const { lang } = ctx.query;
     const { type, id } = ctx.params;
@@ -83,7 +83,7 @@ router.get('/:type/:id', async (ctx) => {
   }
 });
 
-router.get('/:type/:id/list', async (ctx) => {
+router.get('/:type/:id/list', async (ctx: { params: { type: any; id: any; }; body: string[]; status: number; }) => {
   const { type, id } = ctx.params;
 
   try {
@@ -94,7 +94,7 @@ router.get('/:type/:id/list', async (ctx) => {
   }
 });
 
-router.get('/:type/:id/:imageType', async (ctx) => {
+router.get('/:type/:id/:imageType', async (ctx: { params: { type: any; id: any; imageType: any; }; body: { error: any; availableImages?: string[]; }; type: any; status: number; }) => {
   const { type, id, imageType } = ctx.params;
 
   try {
