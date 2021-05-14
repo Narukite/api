@@ -76,7 +76,7 @@ router.get('/:type/:id', async (ctx) => {
     const { lang } = ctx.query;
     const { type, id } = ctx.params;
 
-    ctx.body = await getEntity(type, id, lang);
+    ctx.body = await getEntity(type, id, lang as string);
   } catch (e) {
     ctx.status = 404;
     ctx.body = { error: e.message };
